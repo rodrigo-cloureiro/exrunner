@@ -1,0 +1,32 @@
+name: CI/CD Pós-deploy
+
+on:
+  push:
+    branches:
+      - pos-deploy
+  pull_request:
+    branches:
+      - pos-deploy
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Fazer checkout de código
+      - name: Checkout de código
+        uses: actions/checkout@v3
+
+      # 2. Configurar a JDK 21
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      # 3. Build e teste
+      - name: Build Maven
+        run: mvn clean install
+
+      - name: Run Selenium Tests
+        run: mvn verify
