@@ -21,15 +21,18 @@ jobs:
       # (baixa o código do repositório GitHub para o ambiente da ação)
       - name: Checkout de código
         uses: actions/checkout@v3
+
       # Configura o java no ambiente
       - name: Configurar Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '21'
+
         # Faz o build do projeto
       - name: Build com Maven
         run: mvn clean install
+
         # Executa os testes
       - name: Executar testes
         run: mvn test
